@@ -5,7 +5,7 @@ g = "000155617172614331015695882353715967998267724099330792924300137068019779698
 
 e=2.71828
 
-decrypt c g n = [map (\(x, y)-> chr (((ord(x)-ord(y)+n) `mod` n)+ord('0'))) (zip c g)]
+decrypt c g n = [map (\(x, y)-> chr (((ord(x)+ord(y)) `mod` n)+ord('0'))) (zip c g)]
 
 simpleg=(e*624.5)/10^12+(sqrt(0.3*0.3+2.0/5.0)+e*0.1)/624.5
 
@@ -18,7 +18,8 @@ brute text g = decrypt text curg n ++ brute text newg
          n = 10
 
 
-runBrute = filter (all isDigit) $ brute "25769289" g
+runBrute =filter (\x->length x == 8 && read (take 2 x) <=31 && read (take 2 (drop 2 x)) <=12) $ filter (all isDigit) $ brute "25769289" g
+runBrute2 =filter (\x->length x == 8 && read (take 2 x) <=31 && read (take 2 (drop 2 x)) <=12 && drop 4 x =="1984") $ filter (all isDigit) $ brute "25769289" g
 
 text="25769289"
 
