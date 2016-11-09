@@ -1,0 +1,4 @@
+
+(python -c ' '; cat -) | nc ...
+
+sh $ ssh -p1337 guest@x.x.x.x | tee -a log.txt
